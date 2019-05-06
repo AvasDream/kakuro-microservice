@@ -22,5 +22,7 @@ RUN mkdir project && \
   echo "case object Temp" > Temp.scala && \
   sbt compile && \
   rm -r project && rm build.sbt && rm Temp.scala && rm -r target
-
+RUN echo 'alias e=exit' >> ~/.bashrc
+RUN echo 'alias c=clear' >> ~/.bashrc
+RUN echo 'alias run="cd /root/src && sbt run"' >> ~/.bashrc
 WORKDIR /root/src 

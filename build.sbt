@@ -1,0 +1,6 @@
+name        := "kakuro-microservice"
+version       := "0.0.2"
+scalaVersion  := "2.11.8"
+scalaSource in Compile := baseDirectory.value / "src/"
+libraryDependencies += "com.typesafe.akka" %% "akka-http"   % "10.1.8" 
+libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.19"
