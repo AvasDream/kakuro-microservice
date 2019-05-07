@@ -11,7 +11,7 @@ docker run -it -p 8080:8080 --volume="$(pwd):/root/src" akka /bin/bash
 
 * Implement JSON and MongoDB
 * Think about which Parts of the model layer or the whole model layer can be here
-* Docker compose for container startup
+* Docker compose for container startup [Documentation](https://docs.docker.com/compose/compose-file/)
 
 ## Network
 
