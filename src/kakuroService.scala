@@ -5,7 +5,8 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import scala.io.StdIn
-import kakuroService.databaseService
+// Import not necessary because they are in the same package
+//import kakuroService.databaseService
 
 
 object KakuroService {
