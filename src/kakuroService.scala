@@ -8,7 +8,11 @@ import scala.io.StdIn
 // Import not necessary because they are in the same package
 //import kakuroService.databaseService
 
+// Save Endpoint
 
+// Load endpoint
+
+// Init endpoint
 object KakuroService {
      def main(args: Array[String]): Unit = {
          
@@ -22,7 +26,7 @@ object KakuroService {
     val route =
       path("api" / "kakuro" / "fields") {
         get {
-          val field = dbs.getField()
+          val field = dbs.getFieldfromFile()
           complete(HttpEntity(ContentTypes.`application/json`, field.toString()))
         }
       }

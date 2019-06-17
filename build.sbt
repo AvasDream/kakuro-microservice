@@ -4,7 +4,7 @@ scalaVersion  := "2.11.8"
 scalaSource in Compile := baseDirectory.value / "src/"
 
 // Some this needed dependencies resolver for akka-stream but fml anyway
-//resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases"
+resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases"
 
 libraryDependencies += "com.typesafe.akka" %% "akka-http"   % "10.1.8" 
 libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.19"

@@ -2,3 +2,9 @@ version: "3.7"
 services:
   webapp:
     build: .
+    ports:
+      - "8080:8080"
+  mongodb:
+    build: ./mongodb
+    volume:
+      - "./mongodb/data/db:/data/db"

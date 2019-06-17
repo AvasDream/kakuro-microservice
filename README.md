@@ -17,8 +17,18 @@ docker run -it -p 8080:8080 --volume="$(pwd):/root/src" akka /bin/bash
 
 * When running akka in docker container dont use localhost because of the nating! -> 0.0.0.0
 
+## Database Mongodb
 
-## Database
+* Buggy and no fixes in github, workaround delete all layers of image and pull again, then the first time it works :'( 
+* Github bugs say it is a problem with the filesystem implementation in windows_x64 so no easy fix fml
+
+`docker run -p 27017:27017  --volume "$(pwd)/mongodb/data:/data/" -d  own_mongo`
+
+delete all docker images in Powershell
+
+`docker ps -aq | foreach {docker rm $_}`
+
+## Database Couchdb
 
 Run couchdb in daemon mode and expose port 5984
 
@@ -26,7 +36,7 @@ Run couchdb in daemon mode and expose port 5984
 docker run -p 5984:5984 -d couchdb
 
 # Run with persistent storage
-docker run -p 5984:5984 -v "$(pwd)/database/data:/opt/couchdb/data" -d couch
+docker run -p 5984:5984 -v "$(pwd)/couchdb/data:/opt/couchdb/data" -d couch
 
 docker container top <Container>
 ```
