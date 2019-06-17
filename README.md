@@ -36,9 +36,12 @@ Run couchdb in daemon mode and expose port 5984
 docker run -p 5984:5984 -d couchdb
 
 # Run with persistent storage
-docker run -p 5984:5984 -v "$(pwd)/couchdb/data:/opt/couchdb/data" -d couch
 
-docker container top <Container>
+`docker run -p 5984:5984 -v "$(pwd)/couchdb/data:/opt/couchdb/data" -d couch`
+
+`docker container top <Container>`
+
+
 ```
 
 Database is completly saved inside of the /database/data directory. BUT the whole database has only a size of 77kB containing 2 
@@ -51,3 +54,8 @@ Connect to container flouton at
 [Docker couchdb](https://hub.docker.com/_/couchdb)
 
 [couchdb-scala library](https://github.com/beloglazov/couchdb-scala)
+
+
+## Librarys
+
+[Mongodb](https://mongodb.github.io/mongo-scala-driver/2.6/getting-started/quick-tour-primer/)

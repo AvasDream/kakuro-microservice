@@ -1,10 +1,33 @@
 version: "3.7"
 services:
-  webapp:
-    build: .
+  scala_api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    volumes: 
+      - ".:/root/src"
+    # enable interactive shell
+    #entrypoint: /bin/sh
+    # -i interactive
+    #stdin_open: true
+    # -t tty shell
+    #tty: true
   mongodb:
-    build: ./mongodb
-    volume:
+    build: 
+      context: ./mongodb
+      dockerfile: Dockerfile
+    ports:
+      - "27017:27017"
+    volumes:
       - "./mongodb/data/db:/data/db"
+  couchdb:
+    build: 
+      context: ./mongodb
+      dockerfile: Dockerfile
+    ports:
+      - "5984:5984"
+    volumes:
+      - "./couchdb/data:/opt/couchdb/data"
+  
