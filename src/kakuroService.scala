@@ -21,16 +21,24 @@ object KakuroService {
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext = system.dispatcher
 
-    val dbs = new databaseService()
+    
+    
 
     val route =
       path("api" / "kakuro" / "fields") {
         get {
-          val field = dbs.getFieldfromFile()
+          val couch = new couchdbService()
+          val field = couch.getFieldfromFile()
           complete(HttpEntity(ContentTypes.`application/json`, field.toString()))
         }
+      }~ path("test") {
+        get { 
+          val mongo = new mongodbService()
+          val field = mongo.getField()
+          complete(HttpEntity(field))
+        }
       }
-    
+
     
     // When running in docker do not use localhost because of the nating!
     val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", 8080)

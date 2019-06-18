@@ -1,15 +1,16 @@
 version: "3.7"
 services:
-  scala_api:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    volumes: 
-      - ".:/root/src"
+  # First develop then integrate in .yml
+  #scala_api:
+    #build: 
+    #  context: .
+    #  dockerfile: Dockerfile
+    #ports:
+    #  - "8080:8080"
+    #volumes: 
+    #  - ./:/root/src
     # enable interactive shell
-    #entrypoint: /bin/sh
+    #entrypoint: bash
     # -i interactive
     #stdin_open: true
     # -t tty shell
@@ -21,13 +22,14 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - "./mongodb/data/db:/data/db"
+      - mongodata:/data/db
   couchdb:
     build: 
-      context: ./mongodb
+      context: ./couchdb
       dockerfile: Dockerfile
     ports:
       - "5984:5984"
     volumes:
-      - "./couchdb/data:/opt/couchdb/data"
-  
+      - ./couchdb/data:/opt/couchdb/data
+volumes:
+  mongodata:

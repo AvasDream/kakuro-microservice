@@ -6,7 +6,7 @@ import scala.concurrent.Future
 import com.ibm.couchdb._
 // Fake it till you make it
 
-class databaseService() {
+class couchdbService() {
     
     def getFieldfromFile(): JsValue = {
         val filename = "grid.json"

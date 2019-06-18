@@ -1,3 +1,7 @@
+## Credentials for docker
+
+couchdb admin/hallowelt
+
 ## Docker
 
 ```
@@ -5,10 +9,24 @@ docker build . -t akka
 
 docker run -it -p 8080:8080 --volume="$(pwd):/root/src" akka /bin/bash
 ```
+## Docker Compose
+
+```
+docker-compose up
+
+# Stop
+docker-compose stop
+
+# Stop & Delete
+docker-compose down
+```
 
 
 ## ToDo
 
+* MongoDb save kakuro POST
+* MongoDB persist default field
+* MongoDb get field
 * Implement JSON and MongoDB
 * Think about which Parts of the model layer or the whole model layer can be here
 * Docker compose for container startup [Documentation](https://docs.docker.com/compose/compose-file/)
@@ -59,3 +77,8 @@ Connect to container flouton at
 ## Librarys
 
 [Mongodb](https://mongodb.github.io/mongo-scala-driver/2.6/getting-started/quick-tour-primer/)
+
+
+## Remember
+
+* Docker has a Server-Client Architecture. So if you have tight iptables rules which block everything you cant share files via volumes! Totally worth investigating for 2.

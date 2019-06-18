@@ -11,3 +11,4 @@ libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.19"
 // https://mvnrepository.com/artifact/com.typesafe.play/play-json_2.11
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.10"
 libraryDependencies += "com.ibm" %% "couchdb-scala" % "0.5.1"
+libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.6.0"
