@@ -5,6 +5,7 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import scala.io.StdIn
+import org.mongodb.scala.bson.ObjectId
 // Import not necessary because they are in the same package
 //import kakuroService.databaseService
 
@@ -33,8 +34,16 @@ object KakuroService {
         }
       }~ path("test") {
         get { 
+          /*
+          Field easy ID:
+          5d09270e3a17ea2b9b975af1
+          Remote Field easy ID:
+          5d111febfb6fc00e79af88fe
+          */
+          var uuid: ObjectId = new ObjectId("5d111febfb6fc00e79af88fe")
           val mongo = new mongodbService()
-          val field = mongo.getGridById
+          val field = mongo.getGridById(uuid)
+          
           complete(HttpEntity(field))
         }
       }

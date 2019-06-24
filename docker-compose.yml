@@ -23,6 +23,7 @@ services:
       - "27017:27017"
     volumes:
       - mongodata:/data/db
+    entrypoint: "mongod --bind_ip_all"
   
 volumes:
   mongodata:
