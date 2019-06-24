@@ -23,13 +23,6 @@ services:
       - "27017:27017"
     volumes:
       - mongodata:/data/db
-  couchdb:
-    build: 
-      context: ./couchdb
-      dockerfile: Dockerfile
-    ports:
-      - "5984:5984"
-    volumes:
-      - ./couchdb/data:/opt/couchdb/data
+  
 volumes:
   mongodata:

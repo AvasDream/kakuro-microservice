@@ -34,7 +34,7 @@ object KakuroService {
       }~ path("test") {
         get { 
           val mongo = new mongodbService()
-          val field = mongo.getField()
+          val field = mongo.getGridById
           complete(HttpEntity(field))
         }
       }
