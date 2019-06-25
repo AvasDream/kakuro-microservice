@@ -18,7 +18,7 @@ import scala.concurrent.duration.Duration
 
 class mongodbService() extends DAOInterface {
 
-    val DEBUG = true
+    val DEBUG = false
     // Class to BSON
     val codecRegistry = fromRegistries(fromProviders(classOf[Grid]), DEFAULT_CODEC_REGISTRY )
     // !!!! Access docker host from docker container with HOST ip address !!!!
@@ -31,24 +31,21 @@ class mongodbService() extends DAOInterface {
     val collection: MongoCollection[Grid] = database.getCollection("fields_test")
     if (DEBUG) {println(collection)}
     
-
+    // Read
     override def getGridById(id: Int): (String) = {
         try {
             val res = collection.find(equal("_id",id)).first().toFuture()
             val grid = Await.result(res,Duration.Inf)
             val data = grid.get()
-            println(grid)
             val field = data._2
-            println(field)
-            //val field = grid
-            println(field)
             field
         } catch {
             case _: Throwable => "{'success':'false'}" 
         }
         
     }
-    override def saveGrid(grid: String): Unit = {
+    // Create
+    override def saveGrid(grid: String): String = {
     /* 
     !!! count is of type Int, Possible part for problems when doing stress tests with a lot of inserts
     !!! Database acces for collection count, could be optimized for performance
@@ -57,18 +54,30 @@ class mongodbService() extends DAOInterface {
     {
         val count = Await.result(collection.count().toFuture(), Duration.Inf)
         println("Elements in Collection:" + count)
-        val inc = count.toInt + 1 
-        Await.result(collection.insertOne(Grid(inc, grid)).toFuture(), Duration.Inf)
+        val inc = count.toInt + 1
+        val res = collection.insertOne(new Grid(inc, grid)).toFuture() 
+        Await.result(res, Duration.Inf)
+        "{'success':'true'}"
     } catch {
         case _: Throwable => "{'success':'false'}"
+        }
     }
-    
-    }
-
+    // Update
     override def editGrid(id:Int, grid:String): String = {
-        val res = collection.replaceOne(equal("_id", id), new Grid(id,grid))
-        //Await.result(res,Duration.Inf)
-        "{'success':'false'}"
+        try {
+            val res = collection.replaceOne(equal("_id", id), new Grid(id,grid)).toFuture()
+            Await.result(res,Duration.Inf)
+            "{'success':'true'}"
+        } catch {
+            case _: Throwable => "{'success':'false'}"
+        }
+        
+    }
+    // Delete
+    override def deleteGridById(id: Int): String = {
+        val res = collection.deleteOne(equal("_id", id)).toFuture()
+        Await.result(res,Duration.Inf)
+        "{'success':'true'}"
     }
 }
 case class Grid(_id: Int, grid: String) {

@@ -1,20 +1,20 @@
 version: "3.7"
 services:
   # First develop then integrate in .yml
-  #scala_api:
-    #build: 
-    #  context: .
-    #  dockerfile: Dockerfile
-    #ports:
-    #  - "8080:8080"
-    #volumes: 
-    #  - ./:/root/src
+  scala_api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes: 
+      - ./:/root/src
     # enable interactive shell
-    #entrypoint: bash
+    entrypoint: "sbt run"
     # -i interactive
     #stdin_open: true
     # -t tty shell
-    #tty: true
+    tty: true
   mongodb:
     build: 
       context: ./mongodb
