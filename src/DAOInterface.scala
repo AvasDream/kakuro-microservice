@@ -5,13 +5,11 @@ trait DAOInterface {
   //def getGridById(id: Int): (Int, String)
   //def getAllGrids: List[(Int, String)]
   //Create
-  
+  def saveGrid(grid: String): Unit
   // Read
-  def getGridById(id: ObjectId): (String)
-
-
+  def getGridById(id: Int): (String)
   // Update
-
+  def editGrid(id:Int, grid:String): String
 
   // Delete
   //def saveGrid(grid: String): Unit

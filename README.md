@@ -82,3 +82,5 @@ Connect to container flouton at
 ## Remember
 
 * Docker has a Server-Client Architecture. So if you have tight iptables rules which block everything you cant share files via volumes! Totally worth investigating for 2.
+
+* Access Docker Host from Docker Container with local Docker Host IP [Fuck_my_life.jpg](https://nickjanetakis.com/blog/docker-tip-35-connect-to-a-database-running-on-your-docker-host)

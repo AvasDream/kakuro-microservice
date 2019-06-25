@@ -22,31 +22,48 @@ object KakuroService {
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext = system.dispatcher
 
-    
-    
 
     val route =
-      path("api" / "kakuro" / "fields") {
+      path("api" / "kakuro" / "fields" / "file") {
         get {
           val couch = new couchdbService()
           val field = couch.getFieldfromFile()
           complete(HttpEntity(ContentTypes.`application/json`, field.toString()))
         }
-      }~ path("test") {
+      }~
+        // Read
         get { 
-          /*
-          Field easy ID:
-          5d09270e3a17ea2b9b975af1
-          Remote Field easy ID:
-          5d111febfb6fc00e79af88fe
-          */
-          var uuid: ObjectId = new ObjectId("5d111febfb6fc00e79af88fe")
-          val mongo = new mongodbService()
-          val field = mongo.getGridById(uuid)
+          pathPrefix("api" / "kakuro" / "fields" / IntNumber) { id => 
+            val mongo = new mongodbService()
+            val field = mongo.getGridById(id)
+            complete(HttpEntity(ContentTypes.`application/json`,field.toString()))
+          }
+        
+      }~ path("api" / "kakuro" / "fields") {
+        // Create
+        post {
+          entity(as[String]) { grid =>
+            val mongo = new mongodbService()
+            val dbResp = mongo.saveGrid(grid)
+            complete(HttpEntity(ContentTypes.`application/json`, "{'success': 'true'}"))
+          }
           
-          complete(HttpEntity(field))
         }
-      }
+      }~ 
+        // Update
+        put {
+          pathPrefix("api" / "kakuro" / "fields" / IntNumber) { id => 
+            entity(as[String]) { grid =>
+              val mongo = new mongodbService()
+              
+              val dbResp = mongo.editGrid(id,grid)
+              complete(HttpEntity(ContentTypes.`application/json`, "{'success': 'true'}"))
+            }
+          }
+          
+          
+        }
+      
 
     
     // When running in docker do not use localhost because of the nating!
