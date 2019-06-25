@@ -12,3 +12,7 @@ libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.19"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.10"
 libraryDependencies += "com.ibm" %% "couchdb-scala" % "0.5.1"
 libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.6.0"
+libraryDependencies ++= Seq(
+  "com.typesafe.slick" %% "slick" % "3.0.0",
+  "org.slf4j" % "slf4j-nop" % "1.6.4"
+)
